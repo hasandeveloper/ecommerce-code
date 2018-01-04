@@ -1,0 +1,17 @@
+<h3><%=@categories.name%></h3>
+<%= link_to "Delete", category_path(@categories.id), method: :delete ,  data: {confirm: "Are you sure you want to delete This category #{@categories.name}"}%>|<%= link_to "Edit", edit_category_path(@categories.id)%>
+
+<h4>List Of Products(<%=@categories.products.length%>)</h4>
+
+
+<%if @categories.products.empty?%>
+<h4>No Products Found</h4>
+<%else%>
+<ol>
+  <% @categories.products.each do |product| %>
+  <li><%=link_to product.name, product_path(product.id)%></br>Price:<%=product.price%></br>Description:<%=product.description%></li>
+</ol>
+<%end%>
+<%end%>
+
+<%= link_to "Add Product", new_product_path(category_id: @categories.id)%>

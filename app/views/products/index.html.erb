@@ -1,0 +1,13 @@
+<h1>The List of Products Are(<%=@product.length%>)</h1>
+<%if @product.empty?%>
+<h4>No Products Found</h4>
+<%else%>
+<ol>
+  <% @product.each do |product| %>
+  <li><%=link_to product.name, product_path(product.id)%></br>Price:<%=product.price%></br>Description:<%=product.description%></li>
+<%end%>
+</ol>
+<%end%>
+<%if (user_signed_in?) && (can? :create, Product.new )%>
+<%= link_to "Add Product", new_product_path%>
+<%end%>

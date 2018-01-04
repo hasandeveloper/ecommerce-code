@@ -1,0 +1,38 @@
+<%= form_for @product do |f| %>
+
+
+<% if @product.errors.any? %>
+<h4>These Errors Are Prohibited From</h4>
+<ol>
+  <% @product.errors.full_messages.each do |msg| %>
+  <li><%=msg%></li>
+</ol>
+<%end%>
+<%end%>
+
+
+<label for="product_category">Category:</label>
+<%=f.collection_select :category_id, Category.all, :id, :name, prompt: "Select"%></br>
+
+<label for="product_name">Name: </label></br>
+<%=f.text_field :name%></br>
+
+<label for="product_price">Price:</label></br>
+<%=f.number_field :price%></br>
+
+<label for="product_stock">Stock:</br>
+<%=f.number_field :stock%></br>
+
+<label for="product_description">Description:</label></br>
+<%=f.text_area :description%></br>
+
+<label for="product_cod_eligible">Cod_eligible</label>
+<%=f.check_box :cod_eligible%></br>
+
+<label for="image_url">Image url:</label></br>
+<%=f.text_field :image%></br>
+
+<%=f.submit%>
+
+
+<%end%>

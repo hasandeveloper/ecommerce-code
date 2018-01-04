@@ -1,0 +1,47 @@
+<!-- <ul>
+<%@wishlist.each do |wishlist|%>
+<li><p>Name:<%=wishlist.product.name%></br>Price:<%=wishlist.product.price%></li>
+<%end%>
+</ul> -->
+
+
+<h2>Your wishlist</h2>
+<% if @wishlist.empty? %>
+	<p> Your cart is empty. <%= link_to "Shop", products_path%> </p>
+<% else %>
+	<table border="1">
+		<thead>
+			<tr>
+				<th> # </th>
+				<th> 	</th>
+				<th> Name </th>
+				<th> Price </th>
+				<th> Quantity </th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+			<% total=0 %>
+			<% @wishlist.each_with_index do |wishlist, index| %>
+			<tr>
+				<td> <%= index + 1 %> </td>
+				<td> <%= image_tag(wishlist.product.image, size: "150x125") %> </td>
+				<td> <%=  link_to wishlist.product.name, product_path(wishlist.product.id)%></br>
+          <%= link_to "delete", wishlist_path(wishlist.id), method: :delete, data: {confirm: "Are You sure You want to delete #{wishlist.product.name}"}%>
+
+		 </td>
+				<td> <%= wishlist.product.price %>  </td>
+				<td> <%= wishlist.quantity %></td>
+
+
+				<% total += wishlist.product.price * wishlist.quantity%>
+			</td>
+			</tr>
+			<% end %>
+
+		</tbody>
+	</table>
+
+	<h3>wishlist total: <%=total%></h3>
+<% end %>

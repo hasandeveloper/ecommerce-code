@@ -1,0 +1,14 @@
+<h1>List of Categories(<%=@categories.length%>)</h1>
+
+<% if @categories.empty? %>
+<p>No Categories Found </p>
+<%else%>
+<ol>
+<% @categories.each do |category| %>
+<li><%= link_to category.name, category_path(category.id)%>(<%=category.products.length%>)</br>Description:<%=category.description%></br>Created At:<%=category.created_at%></br>Updated At:<%=category.updated_at%></li>
+<%end%>
+</ol>
+<%end%>
+
+
+<%= link_to "Add Category", new_category_path%>
